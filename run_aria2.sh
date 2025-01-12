@@ -17,5 +17,8 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# Deleting dht.dat to resolve DHT routing table loading error in aria2
+[ -f /root/.cache/aria2/dht.dat ] && rm /root/.cache/aria2/dht.dat
+
 # Run aria2c with the downloaded torrent file
 aria2c -c --conf-path=aria2.conf "$TORRENT_FILE" --dir=/movies --file-allocation=none
